@@ -1,0 +1,200 @@
+    <!-- <select id="PaintColor">
+        <option value="0">Select Color</option>
+        <option value="1">Silver</option>
+        <option value="2">Midnight Blue</option>
+        <option value="3">Firebrick Red</option>
+        <option value="4">Spring Green</option>
+    </select>
+    <select id="Interior">
+        <option value="0">Select Interior</option>
+        <option value="1">Beige Fabric</option>
+        <option value="2">Charcoal Fabric</option>
+        <option value="3">White Leather</option>
+        <option value="4">Black Leather</option>
+    </select>
+    <select id="Technology">
+        <option value="0">Select Technology</option>
+        <option value="1">Basic Package (basic sound system)</option>
+        <option value="2">Navigation Package (includes integrated navigation controls)</option>
+        <option value="3">Visibility Package (includes side and rear cameras)</option>
+        <option value="4">Ultra Package (includes navigation and visibility packages)</option>
+    </select>
+    <select id="Wheels">
+        <option value="0">Select Wheels</option>
+        <option value="1">17-inch Pair Radial</option>
+        <option value="2">17-inch Pair Radial Black</option>
+        <option value="3">18-inch Pair Spoke Silver</option>
+        <option value="4">18-inch Pair Spoke Black</option>
+    </select> -->
+
+
+
+
+
+
+
+
+
+
+    
+    //     <!-- <select id="PaintColor">
+        //     <option value="0">Select Color</option>
+        //     <option value="1">Silver</option>
+        //     <option value="2">Midnight Blue</option>
+        //     <option value="3">Firebrick Red</option>
+        //     <option value="4">Spring Green</option>
+        // </select>
+        // <select id="Interior">
+        //     <option value="0">Select Interior</option>
+        //     <option value="1">Beige Fabric</option>
+        //     <option value="2">Charcoal Fabric</option>
+        //     <option value="3">White Leather</option>
+        //     <option value="4">Black Leather</option>
+        // </select>
+        // <select id="Technology">
+        //     <option value="0">Select Technology</option>
+        //     <option value="1">Basic Package (basic sound system)</option>
+        //     <option value="2">Navigation Package (includes integrated navigation controls)</option>
+        //     <option value="3">Visibility Package (includes side and rear cameras)</option>
+        //     <option value="4">Ultra Package (includes navigation and visibility packages)</option>
+        // </select>
+    
+    
+    //     <select id="PaintColor">
+    //         <select id="PaintColor">
+    //         <option value="0">Select Color</option>
+    //         <option value="1">${Paints()}</option>
+    //     </select>
+    //     <select id="Interior">
+    //         <option value="0">Select Interior</option>
+    //         <option value="1"> ${Interiors()}</option>
+    //     </select>
+    //     <select id="Technology">
+    //         <option value="0">Select Technology</option>
+    //         <option value="1"> ${Technologies()} </option>
+    //     </select>
+    //     <select id="Wheels">
+    //         <option value="0">Select Wheels</option>
+    //         <option value="1"> ${Wheels()} </option>
+    // >
+    //     </select>
+    //     </select>
+    
+    
+            // <article class="choices">
+            //     <section class="choices__wheels options">
+            //         <h2>Wheels</h2>
+            //         ${Wheels()}
+            //     </section>
+            //     <section class="choices__interiors options">
+            //         <h2>Interiors</h2>
+            //         ${Interiors()}
+            //     </section>
+            //     <section class="choices__styles options">
+            //         <h2>Paints</h2>
+            //         ${Paints()}
+            //     </section>
+            // </article>
+    
+            <article>
+                <button id="orderButton">Create Custom Order</button>
+            </article>
+    
+            <article class="customOrders">
+                <h2>Custom Jewelry Orders</h2>
+                ${Orders()}
+            </article>
+        `
+    }
+    
+
+import { getTechnologies, setTechnologies } from "./database.js"
+
+const techs = getTechnologies()
+
+document.addEventListener(
+    "change",
+    (event) => {
+        if (event.target.name === "technologies") {
+            setTechnologies(parseInt(event.target.value))
+            window.alert(`user has chose ${event.target.value}`)
+        }
+    }
+)
+
+export const Technologies = () => {
+    let html = "<h2>Technologies</h2>"
+
+    html += '<select id="tech">'
+    html += '<option value="0">Select a technology package</option>'
+
+    const arrayOfOptions = techs.map( (tech) => {
+            return `<option value="${tech.id}">${tech.pack}</option>`
+        }
+    )
+
+    html += arrayOfOptions.join("")
+    html += "</select>"
+    return html
+}
+
+
+
+
+
+
+         
+    // <select id="PaintColor">
+    //     <option value="0">Select Color</option>
+    //     <option value="1">Silver</option>
+    //     <option value="2">Midnight Blue</option>
+    //     <option value="3">Firebrick Red</option>
+    //     <option value="4">Spring Green</option>
+    // </select>
+    // <select id="Interior">
+    //     <option value="0">Select Interior</option>
+    //     <option value="1">Beige Fabric</option>
+    //     <option value="2">Charcoal Fabric</option>
+    //     <option value="3">White Leather</option>
+    //     <option value="4">Black Leather</option>
+    // </select>
+    // <select id="Technology">
+    //     <option value="0">Select Technology</option>
+    //     <option value="1">Basic Package (basic sound system)</option>
+    //     <option value="2">Navigation Package (includes integrated navigation controls)</option>
+    //     <option value="3">Visibility Package (includes side and rear cameras)</option>
+    //     <option value="4">Ultra Package (includes navigation and visibility packages)</option>
+    // </select>
+    // <select id="Wheels">
+    //     <option value="0">Select Wheels</option>
+    //     <option value="1">17-inch Pair Radial</option>
+    //     <option value="2">17-inch Pair Radial Black</option>
+    //     <option value="3">18-inch Pair Spoke Silver</option>
+    //     <option value="4">18-inch Pair Spoke Black</option>
+    // </select> 
+    
+
+    import { CarsRUs } from "./CarsRUs.js"
+
+const mainContainer = document.querySelector("#container")
+
+const renderAllHTML = () => {
+    mainContainer.innerHTML = CarsRUs()
+}
+
+renderAllHTML()
+
+document.addEventListener("stateChanged", event => {
+    console.log("State of data has changed. Regenerating HTML...")
+    renderAllHTML()
+})
+
+export const addCustomOrder = () => {
+    const newOrder = {...database.orderBuilder}
+    const lastIndex = database.customOrders.length - 1
+    newOrder.id = database.customOrders[lastIndex].id + 1
+    newOrder.timestamp = Date.now()
+    database.customOrders.push(newOrder)
+    database.orderBuilder = {}
+    document.dispatchEvent(new CustomEvent("stateChanged"))
+}
